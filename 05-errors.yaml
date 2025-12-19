@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   # this gives the image pull backoff error because that image is not present
-  #- name: nginx
+  #  name: nginx
   #  image: akansj
   
   # this will give crashloop back off errror because it doesn't have command to run
