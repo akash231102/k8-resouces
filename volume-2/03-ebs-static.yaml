@@ -3,8 +3,8 @@ kind: PersistentVolume
 metadata:
   name: ebs-static
 spec:
-  accessmode:
-  - Readwriteonce
+  accessModes:
+  - ReadWriteOnce
   PersistentVolumeReclaimPolicy: Recycle
   capacity:
     storage: 15Gi
