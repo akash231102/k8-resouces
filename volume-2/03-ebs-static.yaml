@@ -7,8 +7,41 @@ spec:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   capacity:
-    storage: 15Gi
+    storage: 15Gi # must be lessthan or equal to disk storage 
   csi:
     driver: ebs.csi.aws.com
     fsType: ext4
     volumeHandle: vol-07e88b069601d7696
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-claim
+spec:
+  storageClassName: ""
+  volumeName: ebs-static
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests: 
+      storage: 15Gi # must be less than or equal to PV storage
+
+---
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: nginx-html
+      mountPath: /usr/share/nginx/html
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1c
+  volumes:
+    name: nginx-html
+    persistentVolumeClaim:
+      claimName: ebs-static
