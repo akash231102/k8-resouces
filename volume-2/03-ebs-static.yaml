@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce
-  PersistentVolumeReclaimPolicy: Recycle
+  persistentVolumeRecaimPolicy: Recycle
   capacity:
     storage: 15Gi
   csi:
