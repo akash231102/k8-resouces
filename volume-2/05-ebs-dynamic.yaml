@@ -5,11 +5,11 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: roboshop-ebs
+  storageClassName: roboshop-ebs   # make sure this StorageClass exists
   resources:
     requests:
       storage: 4Gi
-    
+
 ---
 apiVersion: v1
 kind: Pod
@@ -18,15 +18,15 @@ metadata:
   labels:
     purpose: ebs-dynamic
 spec:
-  containers:
+  containers:                      # plural, list
   - name: nginx
     image: nginx
     volumeMounts:
     - name: nginx-html
       mountPath: /usr/share/nginx/html
-  volumes:
-    name: nginx-html
-    persistentVolumeClaim: 
+  volumes:                         # plural, list
+  - name: nginx-html
+    persistentVolumeClaim:         # lowercase, correct key
       claimName: ebs-dynamic
 
 ---
@@ -43,5 +43,6 @@ spec:
     port: 80
     targetPort: 80
     nodePort: 30007
+
 
   
