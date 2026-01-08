@@ -42,6 +42,6 @@ spec:
   nodeSelector:
     topology.kubernetes.io/zone: us-east-1c
   volumes:
-    name: nginx-html
+  - name: nginx-html
     persistentVolumeClaim:
       claimName: ebs-static
